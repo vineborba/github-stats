@@ -5,14 +5,12 @@ import tailwindStyles from "./tailwind.css";
 
 import AppBar from "./components/AppBar";
 
-export let links: LinksFunction = () => {
-  return [
+export const links: LinksFunction = () => [
     {
       rel: "stylesheet",
       href: tailwindStyles,
     },
   ];
-};
 
 export default function App() {
   return (

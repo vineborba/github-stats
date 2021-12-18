@@ -1,0 +1,6 @@
+.cache/
+build/
+public/build/
+.gitignore
+README.md
+node_modules

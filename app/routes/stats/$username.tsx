@@ -1,49 +1,61 @@
-import { LoaderFunction, useLoaderData } from "remix";
-import { useParams } from "remix";
-
-const GH_BASE_URL = "https://api.github.com/search/repositories";
+import { LoaderFunction, useLoaderData, useParams } from "remix";
+import endpoints from "../../api/endpoints";
 
 const getLanguagesUrl = (username: string) =>
-  `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=midnight-purple`;
+  `${endpoints.langs}?username=${username}&layout=compact&theme=midnight-purple`;
 
-const getStatusUrl = (username: string) =>
-  `https://github-readme-stats.vercel.app/api/?username=${username}&theme=midnight-purple`;
+const getStatsUrl = (username: string) =>
+  `${endpoints.stats}?username=${username}&theme=midnight-purple`;
 
 const getRepoUrl = (username: string, repo: string) =>
-  `https://github-readme-stats.vercel.app/api/pin/?username=${username}&repo=${repo}&theme=midnight-purple`
+  `${endpoints.repoPins}?username=${username}&repo=${repo}&theme=midnight-purple`;
 
-export let loader: LoaderFunction = async ({ params }) => {
+interface IRepo {
+  name: string;
+}
+
+export const loader: LoaderFunction = async ({ params }) => {
   const { username } = params;
-  const query = "?per_page=4&q=" + encodeURIComponent(`user:${username}`);
-  const completeUrl = GH_BASE_URL + query;
+  const query = `?per_page=4&q=${encodeURIComponent(`user:${username}`)}`;
+  const completeUrl = endpoints.repos + query;
   const response = await fetch(completeUrl, {
     headers: {
       accept: " application/vnd.github.v3+json",
     },
   });
   const responseJson = await response.json();
-  console.log(responseJson);
 
   return responseJson.items;
 };
 
-export default function StatsIndex() {
+const StatsIndex = () => {
   const params = useParams();
-  const repos = useLoaderData();
+  const repos = useLoaderData<IRepo[]>();
+
+  if (!params.username) {
+    return null;
+  }
 
   return (
     <>
       <h1 className="text-white mb-4">{`Status de ${params.username}`}</h1>
       <section className="w-full bg-paper grid grid-cols-2 gap-4 rounded-lg p-4">
-        <img src={getStatusUrl(params.username!)} />
-        <img src={getLanguagesUrl(params.username!)} />
+        <img src={getStatsUrl(params.username)} alt="user stats" />
+        <img src={getLanguagesUrl(params.username)} alt="user top languages" />
       </section>
       <h1 className="text-white my-4">{`Status de ${params.username}`}</h1>
       <section className="w-full bg-paper grid grid-cols-2 gap-4 rounded-lg p-4">
-        {repos.map(repo => (
-          <img src={getRepoUrl(params.username!, repo.name)} />
-        ))}
+        {repos.map((repo) => {
+          if (!params.username) {
+            return null;
+          }
+          return (
+            <img src={getRepoUrl(params.username, repo.name)} alt="repo pin" />
+          );
+        })}
       </section>
     </>
   );
-}
+};
+
+export default StatsIndex;

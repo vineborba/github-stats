@@ -8,11 +8,11 @@ interface UserData {
   avatar_url: string;
 }
 
-export let loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
   const searchParam = url.searchParams.get("q");
   const query =
-    "?per_page=8&q=" + encodeURIComponent(`${searchParam} in:login type:user`);
+    `?per_page=8&q=${encodeURIComponent(`${searchParam} in:login type:user`)}`;
   const completeUrl = GH_BASE_URL + query;
   const response = await fetch(completeUrl, {
     headers: {

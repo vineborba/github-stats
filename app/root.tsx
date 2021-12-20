@@ -1,16 +1,16 @@
-import type { LinksFunction } from "remix";
-import { LiveReload, Outlet, Links } from "remix";
+import type { LinksFunction } from 'remix';
+import { LiveReload, Outlet, Links } from 'remix';
 
-import tailwindStyles from "./tailwind.css";
+import tailwindStyles from './tailwind.css';
 
-import AppBar from "./components/AppBar";
+import AppBar from './components/AppBar';
 
 export const links: LinksFunction = () => [
-    {
-      rel: "stylesheet",
-      href: tailwindStyles,
-    },
-  ];
+  {
+    rel: 'stylesheet',
+    href: tailwindStyles,
+  },
+];
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
       <body>
         <AppBar />
         <Outlet />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );

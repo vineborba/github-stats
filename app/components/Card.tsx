@@ -1,25 +1,29 @@
-import { Link } from "remix";
+import { Link } from 'remix';
 
 interface Props {
   username: string;
   avatar?: string;
+  className?: string;
 }
 
 const defaultProps = {
-  avatar: ''
-}
+  avatar: '',
+  className: '',
+};
 
-const Card = ({ username, avatar }: Props) => (
-    <Link to={`/stats/${username}`}>
-      <article className="bg-paper p-2 rounded-2xl">
-        <div className="bg-slate-500 rounded">
-          {avatar && <img src={avatar} alt="avatar" />}
+const Card = ({ username, avatar, className }: Props) => {
+  return (
+    <article className={`bg-paper p-2 rounded-2xl w-fit ${className}`}>
+      <Link to={`/stats/${username}`}>
+        <div className="bg-slate-500 rounded-t">
+          {avatar && <img src={avatar} alt="avatar" className="rounded-t" />}
         </div>
-        <p className="text-white py-2">{username}</p>
-      </article>
-    </Link>
-  )
+        <h3 className="text-white py-2">{username}</h3>
+      </Link>
+    </article>
+  );
+};
 
 Card.defaultProps = defaultProps;
 
-export default Card
+export default Card;

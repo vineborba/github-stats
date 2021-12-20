@@ -9,6 +9,7 @@
     "dev": "concurrently \"npm run dev:css\" \"node -r dotenv/config node_modules/.bin/remix dev\"",
     "dev:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/tailwind.css --watch",
     "lint": "eslint --ext ts,tsx ./app",
+    "lint:fix": "eslint --ext ts,tsx ./app --fix",
     "postinstall": "remix setup node",
     "start": "remix-serve build"
   },
@@ -31,6 +32,7 @@
     "concurrently": "^6.4.0",
     "eslint": "^8.5.0",
     "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.3",

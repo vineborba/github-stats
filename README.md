@@ -1,6 +1,6 @@
 # GitHub Stats
 
-Esse projetinho nasceu como uma prova de conceito sobre o framework Remix para React. Ideia e assets utilizados foram retirados do desafio [DevBook](https://devchallenge.vercel.app/challenges/5f261d39ecb9243236c05387/details).
+Esse projeto nasceu como uma prova de conceito sobre o framework Remix para React. Ideia e assets utilizados foram retirados do desafio [DevBook](https://devchallenge.vercel.app/challenges/5f261d39ecb9243236c05387/details).
 
 No momento da escrita, está sendo publicado na [Vercel](https://vercel.com), acesse [aqui](https://github-stats-rouge.vercel.app/).
 

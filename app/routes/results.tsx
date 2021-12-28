@@ -61,6 +61,7 @@ export default function Results() {
           .slice(page > 2 ? page - 3 : 0, page > 2 ? page + 2 : 5)
           .map((el) => (
             <Link
+              key={el.toString()}
               to={`/results?q=${query}&page=${el}`}
               className={`px-2 ${
                 el === page ? 'text-primary' : 'text-white'

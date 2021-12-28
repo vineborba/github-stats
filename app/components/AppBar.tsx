@@ -9,6 +9,7 @@ const AppBar = () => (
     </Link>
     <Form action="/results" method="get" className="p-0">
       <SearchBar />
+      <input hidden name="page" value={1} readOnly />
     </Form>
   </header>
 );
